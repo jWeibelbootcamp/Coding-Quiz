@@ -9,19 +9,24 @@
     </head>
  
     <body>
-        
-        <container id="main-box">
-            <h5>View High Scores</h5>
-            <p id="timer"></p>
-            <container id="content-box">
+        <div id="quiz-box">
+            <container id="score-box">    
+                <h5 id="high-score">View High Scores</h5>
+                <h5 id="timer">Time: </h5>
+            </container>
+
+            <container id="question-box">
                 <h1 id="header-title"> Coding Quiz Challenge</h1>
+            
                 <div id="quiz-instructions">
                     <p>Try to answer the following code-related questions within the time limit. Keep in mind that incorrect answers will penalize your score/time by ten seconds!</p>
                 </div>
-                <button id="start-quiz" class="btn">Start Quiz</button>
-             </container>
-        </container>
-        
+            
+                <button id="start-button"> Start Quiz</button>
+            
+            </container>
+        </div>
+
         <script src="./assets/js/script.js"></script>
     </body>
 
