@@ -13,6 +13,10 @@
 /* #score-timer-box {
 } */
 
+.hide {
+    display: none;
+}
+
 #high-score {
     margin: 0;
     color: mediumorchid;
@@ -29,8 +33,7 @@
 #instruction-box {
     flex-wrap: wrap;
     justify-content: center;
-    /* display: none;  */
-    /* toggle display */
+
 }
 
 #quiz-title {
@@ -45,8 +48,7 @@
 }
 
 #question-box {
-    /* display: none;  */
-    /* toggle display */
+
 }
 
 #question {
@@ -70,18 +72,23 @@ ul {
     font-weight: lighter;
     text-indent: 3%;
     border-top: 2px solid lightslategray;
-    /* display: none;  */
-    /* toggle display */
+
 }
 
 #final-score-box {
     text-align: center;
-    /* display: none;  */
-    /* toggle display */
+
 }
 
 #final-score {
     font-size: 14pt;
+}
+
+#high-score-page {
+    text-align: center;
+    
+    /* display: none;  */
+    /* toggle display */
 }
 
 #start-button {
@@ -96,20 +103,28 @@ ul {
     cursor: pointer;
 }
 
-#answer-1, 
-#answer-2, 
-#answer-3, 
-#answer-4 {
+.answer {
     border: none;
     border-radius: 10px;
     font-size: 12pt;
     color: aliceblue;
     background-color: darkslateblue;
     padding: 8px 15px;
+    margin: 2px;
     cursor: pointer;
+    width: fit-content;    
 }
 
-#score-submit {
+#button-box {
+    display: flex;
+    flex-direction: column;
+    width: 70%;
+    margin: 0 auto;
+}
+
+#score-submit,
+#go-back,
+#clear-high-scores {
     border: none;
     border-radius: 10px;
     margin-left: 10px;
@@ -122,11 +137,10 @@ ul {
 
 /* button press effect */
 #start-button:active,
-#answer-1:active, 
-#answer-2:active, 
-#answer-3:active, 
-#answer-4:active,
-#score-submit:active {
+.answer:active,
+#score-submit:active,
+#go-back:active,
+#clear-high-scores:active {
     transform: scale(0.98);
     background-color: mediumorchid;
 }

@@ -26,23 +26,30 @@
             
             </container>
 
-            <container id="question-box">
-                <h1 id="question">question text dfdfd fdfdf dfdf dfdf dfdfdf dfdfdf dfdfd fdfdf?</h1>
-                    <ul>
-                        <li><button id="answer-1">1) answer text</button></li>
+            <container class="hide" id="question-box">
+                <h1 id="question">question text?</h1>
+                    <div id="button-box">
+                        <!-- <li><button id="answer-1">1) answer text</button></li>
                         <li><button id="answer-1">2) answer text</button></li>
                         <li><button id="answer-1">3) answer text</button></li>
-                        <li><button id="answer-1">4) answer text</button></li>
-                    </ul>
+                        <li><button id="answer-1">4) answer text</button></li> -->
+                    </div>
                 <h2 id="correct-or-wrong">Correct!</h2>
             </container>
 
-            <container id="final-score-box">
+            <container class="hide" id="final-score-box">
                 <h1>All done!</h1>
                 <p id="final-score">Your final score is 'placeholder'.</p>
                 <form>
                     <label for="initials">Enter initials: </label><input type="text" id="initials" name="initials"><button id="score-submit">Submit</button>
                 </form>
+            </container>
+        
+            <container class="hide" id="high-score-page">
+                <h2>High scores</h2>
+
+                <button id="go-back">Go back</button>
+                <button id="clear-high-scores">Clear high scores</button>
             </container>
         </div>
 
