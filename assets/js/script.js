@@ -79,10 +79,10 @@ function checkAnswer() {
 
 function finalScore() {
     var finalScore = document.getElementById("final-score");
-    finalScore.textContent = "Your final score is " + timeRemaining; //have to define timeRemaining when creating timer.
+    finalScore.textContent = "Your final score is " + timeRemaining; //have to define timeRemaining when creating timer.  and add entire timer. 
 }
 
-function initials() { //work on storing initials from form and score.
+function initials() { //work on storing initials from form and score in currentScore object.
     currentScore = {
         initials: ,
         score: timeRemaining.value
