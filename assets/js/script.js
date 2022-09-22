@@ -1,4 +1,5 @@
 var startButton = document.getElementById("start-button");
+var submitButton = document.getElementById("score-submit");
 var i = 0;
 
 //Array to hold objects for each question and answer choices w/ correct answer identified:
@@ -37,10 +38,15 @@ function startGame() {
     buildQuestions();
 }
 
-//Populates the #question id with questions array index[i]. Clears any pre-existing answer buttons in #button-box. 
+//Populates the #question id with questions array index[i]. Clears any pre-existing answer buttons in #button-box. Checks for previous correct or wrong answer to display #correct-or-wrong.
 function buildQuestions() {
     document.getElementById("question").textContent = questions[i].text;
     document.getElementById("button-box").innerHTML = "";
+    var correctOrWrong = document.getElementById("correct-or-wrong");
+    if (correctOrWrong.textContent === "Correct!" || correctOrWrong.textContent === "Wrong!") {
+        correctOrWrong.removeAttribute("class");
+    }
+            
 //Creates buttons with text of answerChoice and class .answer for each 'answers' element within index[i]. Adds the buttons to #button-box. Calls checkAnswer() on button click.
     questions[i].answers.forEach(function (answerChoice) {
         var button = document.createElement("button");
@@ -52,22 +58,38 @@ function buildQuestions() {
     })
 }
 
-//checks if the clicked answer button matches the correct answer then increments i.
+//checks if the clicked answer button matches the correct answer then increments i. Changes the text of #correct-or-wrong to "Correct!" or "Wrong!"
 function checkAnswer() {
     console.log(this.value);
     if (this.value !== questions[i].correct) {
-        console.log("wrong");
+        document.getElementById("correct-or-wrong").textContent = "Wrong!";
     } else {
-        console.log("correct");
+        document.getElementById("correct-or-wrong").textContent = "Correct!";
     } 
     i++;
-//Checks if the current question [i] was the last and either builds the next question or ends the game.
+//Checks if the current question [i] was the last and either builds the next question or ends the game. If game ends, hides #question-box, unhides #final-score-box, and calls finalScore().
     if (i === questions.length) {
-        console.log("end game");
+        document.getElementById("question-box").setAttribute("class", "hide");
+        document.getElementById("final-score-box").removeAttribute("class");
+        finalScore();
     } else {
         buildQuestions();
     }
 }
 
+function finalScore() {
+    var finalScore = document.getElementById("final-score");
+    finalScore.textContent = "Your final score is " + timeRemaining; //have to define timeRemaining when creating timer.
+}
+
+function initials() { //work on storing initials from form and score.
+    currentScore = {
+        initials: ,
+        score: timeRemaining.value
+    }
+    
+    submitButton.onclick
+}
 
 startButton.addEventListener("click", startGame);
+submitButton.addEventListener("click", initials);
