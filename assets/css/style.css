@@ -10,9 +10,6 @@
     overflow: auto;
 }
 
-/* #score-timer-box {
-} */
-
 .hide {
     display: none;
 }
@@ -33,7 +30,6 @@
 #instruction-box {
     flex-wrap: wrap;
     justify-content: center;
-
 }
 
 #quiz-title {
@@ -47,37 +43,22 @@
     font-size: 14pt;
 }
 
-#question-box {
-
-}
-
 #question {
-    margin: 8% 8% 0% 18%;
-    text-align: left;
-}
-
-li {
-    padding: 7px 0px 0px 100px;
-}
-
-ul {
-    list-style: none;
+    margin: 8% 8% 3% 15%;
 }
 
 #correct-or-wrong {
-    margin: 0% 18%;
+    margin: 1% 15%;
     text-align: left;
     color: lightslategray;
     font-style: italic;
     font-weight: lighter;
     text-indent: 3%;
     border-top: 2px solid lightslategray;
-
 }
 
 #final-score-box {
     text-align: center;
-
 }
 
 #final-score {
@@ -86,9 +67,6 @@ ul {
 
 #high-score-page {
     text-align: center;
-    
-    /* display: none;  */
-    /* toggle display */
 }
 
 #start-button {
@@ -107,12 +85,13 @@ ul {
     border: none;
     border-radius: 10px;
     font-size: 12pt;
+    text-align: left;
     color: aliceblue;
     background-color: darkslateblue;
     padding: 8px 15px;
-    margin: 2px;
+    margin: 3px;
+    width: 230px;    
     cursor: pointer;
-    width: fit-content;    
 }
 
 #button-box {
