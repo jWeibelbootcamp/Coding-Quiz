@@ -91,7 +91,7 @@ function checkAnswer() {
     }
     i++;
     //Checks if the current question [i] was the last and either builds the next question or ends the game. If game ends, hides #question-box, hides #timer, unhides #final-score-box, and calls finalScore().
-    if (i === questions.length) {
+    if (i === questions.length || secondsLeft <= 0) {
         document.getElementById("question-box").setAttribute("class", "hide");
         document.getElementById("final-score-box").removeAttribute("class");
         timer.setAttribute("class", "hide");
@@ -101,19 +101,38 @@ function checkAnswer() {
     }
 }
 
-//On submit button click, stores initials and time score in currentScore object, then saves to local storage and JSON and converts to string.
+//working on local storage section here
+function renderHighScore() {
+    var highScores = JSON.parse(localStorage.getItem(highScores)) || [];
+    var scoreListEl = document.getElementById("highScores");
+    
+    for (var i = 0; i < highScores.length; i++) {
+        var scoreItem = document.createElement("li");
+        scoreItem.textContent = highScores[i].score;
+        
+        scoreListEl.appendChild(scoreItem);
+    }
+}
+
+function saveHighScore () {
+    var newScore = {
+        score: secondsLeft, 
+        initials: initials.value
+    }
+
+    var highScores = JSON.parse(localStorage.getItem(highScores)) || [];
+    highScores.push(newScore);
+    highScores.sort((a, b) => b.score - a.score);
+    localStorage.setItem("highScores", JSON.stringify(highScores));
+}
+
+//Submit Button calls saveHighScore(), hides the final score screen and unhides the high scores screen.    
 submitButton.addEventListener("click", function (event) {
     event.preventDefault();
-
     document.getElementById("final-score-box").setAttribute("class", "hide");
     document.getElementById("high-score-page").removeAttribute("class");
 
-    var currentScore = {
-        initials: initials.value.trim(),
-        score: secondsLeft
-    };
-
-    localStorage.setItem("currentScore", JSON.stringify(currentScore));
+    saveHighScore();
 })
 
 //Allows View High Scores Button to display High Score Page at any point.
@@ -141,7 +160,8 @@ goBackButton.addEventListener("click", restartGame);
 //bugs: 
 
 //timer not hiding on final score page.
-//timer not re-hiding and not resetting on Go Back button.
+//timer not hiding and resetting on Go Back button.
+//timer doesn't end game when reaching 0.
 
 //local storage component not finished.
 //clear high scores button not finished
