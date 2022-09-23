@@ -1,9 +1,14 @@
+//Button variables from HTML
 var startButton = document.getElementById("start-button");
 var viewScoresButton = document.getElementById("view-high-scores");
 var submitButton = document.getElementById("score-submit");
 var goBackButton = document.getElementById("go-back");
 var clearScoresButton = document.getElementById("clear-high-scores");
+
+//Other global variables
 var initials = document.getElementById("initials");
+var timer = document.getElementById("timer");
+var finalScore = document.getElementById("final-score");
 var i = 0;
 
 //Array to hold objects for each question and answer choices w/ correct answer identified:
@@ -35,11 +40,25 @@ var questions = [
     },
 ]
 
-//Called on 'Start Quiz' button click - hides quiz instructions and calls buildQuestions() to start the question portion: 
+//Creating timer. Timer stops if secondsLeft <= 0 or final question answered.
+var secondsLeft = 50;
+
+function setTime() {
+    var timerInterval = setInterval(function() {
+    secondsLeft--;
+    timer.textContent = "Time: " + secondsLeft;
+
+    if (secondsLeft <= 0 || i === questions.length) {
+        clearInterval(timerInterval);
+    }}, 1000);
+}
+
+//Called on 'Start Quiz' button click - hides quiz instructions and calls buildQuestions() and setTime() to start the question portion: 
 function startGame() {
     document.getElementById("instruction-box").setAttribute("class", "hide");
     document.getElementById("question-box").removeAttribute("class");
     buildQuestions();
+    setTime();
 }
 
 //Populates the #question id with questions array index[i]. Clears any pre-existing answer buttons in #button-box. Checks for previous correct or wrong answer to display #correct-or-wrong.
@@ -48,7 +67,7 @@ function buildQuestions() {
     document.getElementById("button-box").innerHTML = "";
     var correctOrWrong = document.getElementById("correct-or-wrong");
     if (correctOrWrong.textContent === "Correct!" || correctOrWrong.textContent === "Wrong!") {
-        correctOrWrong.removeAttribute("class");
+    correctOrWrong.removeAttribute("class");
     }
 
     //Creates buttons with text of answerChoice and class .answer for each 'answers' element within index[i]. Adds the buttons to #button-box. Calls checkAnswer() on button click.
@@ -62,28 +81,24 @@ function buildQuestions() {
     })
 }
 
-//checks if the clicked answer button matches the correct answer then increments i. Changes the text of #correct-or-wrong to "Correct!" or "Wrong!"
+//checks if the clicked answer button matches the correct answer then increments i. Changes the text of #correct-or-wrong to "Correct!" or "Wrong!" Subtracts 10 seconds for wrong answers.
 function checkAnswer() {
-    console.log(this.value);
     if (this.value !== questions[i].correct) {
         document.getElementById("correct-or-wrong").textContent = "Wrong!";
+        secondsLeft = secondsLeft-10;
     } else {
         document.getElementById("correct-or-wrong").textContent = "Correct!";
     }
     i++;
-    //Checks if the current question [i] was the last and either builds the next question or ends the game. If game ends, hides #question-box, unhides #final-score-box, and calls finalScore().
+    //Checks if the current question [i] was the last and either builds the next question or ends the game. If game ends, hides #question-box, hides #timer, unhides #final-score-box, and calls finalScore().
     if (i === questions.length) {
         document.getElementById("question-box").setAttribute("class", "hide");
         document.getElementById("final-score-box").removeAttribute("class");
-        finalScore();
+        timer.setAttribute("class", "hide");
+        finalScore.textContent = "Your final score is " + secondsLeft;
     } else {
         buildQuestions();
     }
-}
-
-function finalScore() {
-    // var finalScore = document.getElementById("final-score");
-    // finalScore.textContent = "Your final score is " + timeRemaining; //have to define timeRemaining when creating timer.  and add entire timer. 
 }
 
 //On submit button click, stores initials and time score in currentScore object, then saves to local storage and JSON and converts to string.
@@ -95,16 +110,13 @@ submitButton.addEventListener("click", function (event) {
 
     var currentScore = {
         initials: initials.value.trim(),
-        score: timeRemaining.value
+        score: secondsLeft
     };
+
     localStorage.setItem("currentScore", JSON.stringify(currentScore));
 })
 
-function renderInitials() {
-
-}
-
-//Allows View High Scores Button to display High Score Page at any point. 
+//Allows View High Scores Button to display High Score Page at any point.
 viewScoresButton.addEventListener("click", function () {
     document.getElementById("instruction-box").setAttribute("class", "hide");
     document.getElementById("question-box").setAttribute("class", "hide");
@@ -116,8 +128,20 @@ viewScoresButton.addEventListener("click", function () {
 function restartGame() {
     document.getElementById("instruction-box").removeAttribute("class");
     document.getElementById("high-score-page").setAttribute("class", "hide");
+    timer.setAttribute("class", "hide");
+    secondsLeft = 50;
     i = 0;
 }
 
 startButton.addEventListener("click", startGame);
 goBackButton.addEventListener("click", restartGame);
+
+
+
+//bugs: 
+
+//timer not hiding on final score page.
+//timer not re-hiding and not resetting on Go Back button.
+
+//local storage component not finished.
+//clear high scores button not finished
