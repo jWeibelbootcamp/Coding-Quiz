@@ -18,11 +18,13 @@
     display: none;
 }
 
-#high-score {
+#view-high-scores {
     margin: 0;
     color: mediumorchid;
     display: inline;
     float: left;
+    border: none;
+    background: none;
 }
 
 #timer {

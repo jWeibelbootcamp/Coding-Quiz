@@ -1,4 +1,5 @@
 var startButton = document.getElementById("start-button");
+var viewScoresButton = document.getElementById("view-high-scores");
 var submitButton = document.getElementById("score-submit");
 var goBackButton = document.getElementById("go-back");
 var clearScoresButton = document.getElementById("clear-high-scores");
@@ -103,7 +104,15 @@ function renderInitials() {
 
 }
 
+//Allows View High Scores Button to display High Score Page at any point. 
+viewScoresButton.addEventListener("click", function () {
+    document.getElementById("instruction-box").setAttribute("class", "hide");
+    document.getElementById("question-box").setAttribute("class", "hide");
+    document.getElementById("final-score-box").setAttribute("class", "hide");
+    document.getElementById("high-score-page").removeAttribute("class");
+})
 
+//Resets the game upon Go Back button click.
 function restartGame() {
     document.getElementById("instruction-box").removeAttribute("class");
     document.getElementById("high-score-page").setAttribute("class", "hide");
