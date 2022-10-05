@@ -18,7 +18,11 @@
 * N/A
 
 ### **Known Bugs**
-* None 
+* timer not hiding on final score page.
+* timer not hiding and resetting on Go Back button.
+* timer doesn't end game when reaching 0.
+* local storage component not finished.
+* clear high scores button not finished 
 
 ### **License**
 * MIT <br />
