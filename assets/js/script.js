@@ -6,7 +6,6 @@ var goBackButton = document.getElementById("go-back");
 var clearScoresButton = document.getElementById("clear-high-scores");
 
 //Other global variables
-var initials = document.getElementById("initials");
 var timer = document.getElementById("timer");
 var finalScore = document.getElementById("final-score");
 var i = 0;
@@ -115,10 +114,15 @@ function renderHighScore() {
 }
 
 function saveHighScore () {
+    var initials = document.getElementById("initials");
+    var scoreToAdd = document.getElementById("highScores");
+    
     var newScore = {
         score: secondsLeft, 
         initials: initials.value
     }
+
+    scoreToAdd += '<li>' + newScore + '</li>';
 
     var highScores = JSON.parse(localStorage.getItem(highScores)) || [];
     highScores.push(newScore);
@@ -131,7 +135,7 @@ submitButton.addEventListener("click", function (event) {
     event.preventDefault();
     document.getElementById("final-score-box").setAttribute("class", "hide");
     document.getElementById("high-score-page").removeAttribute("class");
-
+    
     saveHighScore();
 })
 
