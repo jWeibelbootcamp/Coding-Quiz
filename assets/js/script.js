@@ -115,19 +115,21 @@ function renderHighScore() {
 
 function saveHighScore () {
     var initials = document.getElementById("initials");
-    var scoreToAdd = document.getElementById("highScores");
+    var highScoreList = document.getElementById("highScores");
+    var newScoreToAdd = '';
     
     var newScore = {
         score: secondsLeft, 
         initials: initials.value
     }
 
-    scoreToAdd += '<li>' + newScore + '</li>';
-
-    var highScores = JSON.parse(localStorage.getItem(highScores)) || [];
-    highScores.push(newScore);
-    highScores.sort((a, b) => b.score - a.score);
+    newScoreToAdd += '<li>' + newScore + '</li>';
+    highScoreList.innerHTML = newScoreToAdd;
     localStorage.setItem("highScores", JSON.stringify(highScores));
+
+    // var highScores = JSON.parse(localStorage.getItem(highScores)) || [];
+    // highScores.push(newScore);
+    // highScores.sort((a, b) => b.score - a.score);
 }
 
 //Submit Button calls saveHighScore(), hides the final score screen and unhides the high scores screen.    
